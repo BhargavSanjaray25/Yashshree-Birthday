@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happiest Birthday Yashshree</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff5f8;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #ff4081;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    button {
+      background-color: #ff4081;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .section {
+      margin-top: 40px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    #customMessage {
+      font-size: 1.5rem;
+      color: #ff4081;
+      margin-top: 30px;
+      white-space: pre-line;
+    }
+
+    #timer {
+      font-weight: bold;
+      font-size: 2rem;
+      color: #222;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Happiest Birthday Yashshree 🎉</h1>
+  <p>Click the button below to begin your special surprise</p>
+  <button onclick="startExperience()">Let's Celebrate 🥳</button>
+
+  <!-- Background Birthday Song -->
+  <audio id="birthdaySong" loop>
+    <source src="Happy Birthday Song!!!-[AudioTrimmer.com].mp3" type="audio/mpeg" />
+    Your browser does not support the audio tag.
+  </audio>
+
+  <!-- Countdown Timer -->
+  <div id="countdown" class="section hidden">
+    <h2>Countdown Begins ⏳</h2>
+    <p>Time Left: <span id="timer">00:00</span></p>
+  </div>
+
+  <!-- Fireworks -->
+  <div id="fireworks" class="section hidden">
+    <h2>💥 Boom! 🎆 Happy Birthday!</h2>
+  </div>
+
+  <!-- Horoscope -->
+  <div id="horoscope" class="section hidden">
+    <h2>Birthday Horoscope ✨</h2>
+    <p>You're about to enter a year full of adventure, love, and unexpected joy. Keep smiling and glowing 🌟</p>
+  </div>
+
+  <!-- Calendar -->
+  <div id="calendar" class="section hidden">
+    <h2>Mark Your Moments 🗓</h2>
+    <p>This year is going to be filled with amazing memories. Ready to create new ones? 💫</p>
+  </div>
+
+  <!-- Custom Message -->
+  <div id="customMessage" class="hidden">
+    🎂💖✨  
+    Happy 17th Birthday, Yashshree 🎉🎈  
+    "A heart so warm, a soul so true,  
+    The world shines brighter just with you. ✨  
+    Candles flicker, stars align,  
+    To celebrate this day divine.  
+  
+    On your birthday, hear my rhyme,  
+    You're a treasure beyond time. ⏳  
+    A soul so radiant, kind, and rare,  
+    Deserves the best beyond compare.  
+  
+    Wishing you joy, love without end,  
+    Happy Birthday, my dearest friend.  
+    Shine so bright with endless light,  
+    With love, laughter, and pure delight.  
+    Happy Birthday! 🎂🎉💖🌟"
+  </div>
+
+  <!-- Years to Time Conversion -->
+  <div class="section hidden" id="timeLived">
+    <h2>🎉 A Life of 17 Beautiful Years 🎉</h2>
+    <p>
+      That's approximately:<br><br>
+      <strong>149,022 hours</strong><br>
+      <strong>8,941,320 minutes</strong><br>
+      <strong>536,479,200 seconds</strong><br><br>
+      of you lighting up the world! ✨💖
+    </p>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;"></canvas>
+
+  <script>
+    function startExperience() {
+      document.getElementById('countdown').classList.remove('hidden');
+      document.getElementById('horoscope').classList.remove('hidden');
+      document.getElementById('calendar').classList.remove('hidden');
+      document.getElementById('customMessage').classList.remove('hidden');
+      document.getElementById('timeLived').classList.remove('hidden');
+      startCountdown();
+    }
+
+    function startCountdown() {
+      let duration = 10;
+      let display = document.getElementById('timer');
+      let countdown = setInterval(function () {
+        let minutes = Math.floor(duration / 60);
+        let seconds = duration % 60;
+        display.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        if (--duration < 0) {
+          clearInterval(countdown);
+          document.getElementById('fireworks').classList.remove('hidden');
+          document.getElementById('birthdaySong').play();
+          launchSideEffects(); // Only this triggers after countdown
+        }
+      }, 1000);
+    }
+
+    function launchSideEffects() {
+      const duration = 3000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+
+    // Load Confetti Script
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js';
+    document.head.appendChild(script);
+  </script>
+
+</body>
+</html>
